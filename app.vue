@@ -1,6 +1,19 @@
 <template>
-  <div>
+  <div class="min-h-screen flex flex-col">
+    <NuxtLoadingIndicator class="bg-rose-600" />
+
     <TheHeader />
-    <NuxtPage />
+
+    <div class="flex-1 bg-slate-50">
+      <NuxtPage />
+    </div>
+    
+    <TheFooter />
   </div>
 </template>
+
+<style>
+body {
+  font-family: Montserrat;
+}
+</style>
