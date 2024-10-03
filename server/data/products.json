@@ -1,0 +1,153 @@
+[
+    {
+      "id": 1,
+      "name": "Home Team Kit 2024",
+      "slug": "home-team-kit-2024",
+      "price": 79.99,
+      "category": "Kits",
+      "description": "Official home team kit for the 2024 season. Made from lightweight, breathable fabric to keep you cool on and off the field.",
+      "sizes": ["S", "M", "L", "XL"],
+      "colors": ["Red", "White"],
+      "rating": 4.8,
+      "images": [
+        "https://example.com/images/home_team_kit_front.jpg",
+        "https://example.com/images/home_team_kit_back.jpg",
+        "https://example.com/images/home_team_kit_side.jpg"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Away Team Kit 2024",
+      "slug": "away-team-kit-2024",
+      "price": 79.99,
+      "category": "Kits",
+      "description": "The official away team kit for the 2024 season, designed with durable fabric and moisture-wicking technology.",
+      "sizes": ["S", "M", "L", "XL", "XXL"],
+      "colors": ["Blue", "Black"],
+      "rating": 4.7,
+      "images": [
+        "https://example.com/images/away_team_kit_front.jpg",
+        "https://example.com/images/away_team_kit_back.jpg"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Team Scarf",
+      "slug": "team-scarf",
+      "price": 19.99,
+      "category": "Accessories",
+      "description": "Show your support with this stylish team scarf. Perfect for match days or keeping warm during winter.",
+      "sizes": ["One Size"],
+      "colors": ["Red", "Blue", "Green"],
+      "rating": 4.9,
+      "images": [
+        "https://example.com/images/team_scarf_1.jpg",
+        "https://example.com/images/team_scarf_2.jpg"
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Team Hoodie",
+      "slug": "team-hoodie",
+      "price": 49.99,
+      "category": "Clothing",
+      "description": "Comfortable and stylish, this team hoodie is made from organic cotton and features the team's official logo.",
+      "sizes": ["M", "L", "XL", "XXL"],
+      "colors": ["Gray", "Black"],
+      "rating": 4.6,
+      "images": [
+        "https://example.com/images/team_hoodie_front.jpg",
+        "https://example.com/images/team_hoodie_back.jpg"
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Limited Edition Captain's Armband",
+      "slug": "limited-edition-captains-armband",
+      "price": 12.99,
+      "category": "Accessories",
+      "description": "Limited edition captain's armband with the team's colors. A perfect gift for any team fan!",
+      "sizes": ["One Size"],
+      "colors": ["Red", "Blue"],
+      "rating": 4.5,
+      "images": [
+        "https://example.com/images/captains_armband.jpg"
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Goalkeeper Gloves",
+      "slug": "goalkeeper-gloves",
+      "price": 34.99,
+      "category": "Accessories",
+      "description": "Pro-level goalkeeper gloves with enhanced grip and padded protection. Available in various sizes.",
+      "sizes": ["S", "M", "L", "XL"],
+      "colors": ["White", "Green"],
+      "rating": 4.7,
+      "images": [
+        "https://example.com/images/goalkeeper_gloves_1.jpg",
+        "https://example.com/images/goalkeeper_gloves_2.jpg"
+      ]
+    },
+    {
+      "id": 7,
+      "name": "Official Match Ball",
+      "slug": "official-match-ball",
+      "price": 49.99,
+      "category": "Equipment",
+      "description": "Official match ball used by the team during the 2024 season. High durability and perfect for all weather conditions.",
+      "sizes": ["Standard"],
+      "colors": ["White", "Black"],
+      "rating": 4.8,
+      "images": [
+        "https://example.com/images/official_match_ball_1.jpg",
+        "https://example.com/images/official_match_ball_2.jpg"
+      ]
+    },
+    {
+      "id": 8,
+      "name": "Team Cap",
+      "slug": "team-cap",
+      "price": 24.99,
+      "category": "Accessories",
+      "description": "Stay cool and support the team with this adjustable cap, featuring an embroidered team logo.",
+      "sizes": ["One Size"],
+      "colors": ["Blue", "Black", "White"],
+      "rating": 4.7,
+      "images": [
+        "https://example.com/images/team_cap_1.jpg",
+        "https://example.com/images/team_cap_2.jpg"
+      ]
+    },
+    {
+      "id": 9,
+      "name": "Team Backpack",
+      "slug": "team-backpack",
+      "price": 39.99,
+      "category": "Accessories",
+      "description": "Durable and spacious team backpack, perfect for carrying your gear on match day.",
+      "sizes": ["One Size"],
+      "colors": ["Black", "Gray"],
+      "rating": 4.8,
+      "images": [
+        "https://example.com/images/team_backpack_1.jpg",
+        "https://example.com/images/team_backpack_2.jpg"
+      ]
+    },
+    {
+      "id": 10,
+      "name": "Team Beanie",
+      "slug": "team-beanie",
+      "price": 14.99,
+      "category": "Accessories",
+      "description": "Keep warm during the colder months while supporting your favorite team with this beanie.",
+      "sizes": ["One Size"],
+      "colors": ["Red", "Blue"],
+      "rating": 4.6,
+      "images": [
+        "https://example.com/images/team_beanie_1.jpg",
+        "https://example.com/images/team_beanie_2.jpg"
+      ]
+    }
+  ]
+  
