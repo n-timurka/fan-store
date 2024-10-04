@@ -12,8 +12,8 @@ export default defineEventHandler((_) => {
   });
 
   return {
-    categories: [...categories],
-    colors: [...colors],
-    sizes: [...sizes],
+    categories: [...categories] as string[],
+    colors: [...colors] as string[],
+    sizes: [...sizes] as string[],
   };
 });

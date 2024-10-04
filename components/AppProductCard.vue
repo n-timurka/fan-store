@@ -1,6 +1,8 @@
 <script setup lang="ts">
+import type { Product } from '~/types/product';
+
 defineProps<{
-    product: object;
+    product: Product;
 }>();
 
 const options = ref({
@@ -28,7 +30,7 @@ const options = ref({
             <div class="flex justify-between items-center">
                 <div class="text-lg">{{ product.price }} &euro;</div>
                 <div class="basis-1/4">
-                    <UButton color="primary" variant="solid" size="lg" block>Buy</UButton>
+                    <UButton color="rose" variant="solid" size="lg" block>Buy</UButton>
                 </div>
             </div>
         </template>
