@@ -9,6 +9,8 @@
     </div>
     
     <TheFooter />
+    
+    <UNotifications />
   </div>
 </template>
 

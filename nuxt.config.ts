@@ -1,22 +1,31 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  app: {
+    head: {
+      charset: "utf-8",
+      viewport: "width=device-width, initial-scale=1",
+    },
+  },
   compatibilityDate: "2024-04-03",
   devtools: { enabled: true },
+  runtimeConfig: {
+    awsRegion: process.env.AWS_REGION,
+    awsKeyId: process.env.AWS_ACCESS_KEY_ID,
+    awsSecretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+    awsBucketName: process.env.AWS_BUCKET_NAME,
+  },
   modules: [
     "@nuxt/image",
-    "@nuxt/fonts",
     "@unlok-co/nuxt-stripe",
     "@nuxt/ui",
     "@nuxt/eslint",
-    "@nuxtjs/i18n",
+    "@nuxtjs/google-fonts",
+    "@pinia/nuxt",
+    "pinia-plugin-persistedstate/nuxt",
   ],
-  fonts: {
-    provider: "google",
-  },
-  image: {
-    domains: ["avatars0.githubusercontent.com"],
-  },
-  i18n: {
-    vueI18n: "./i18n.config.ts",
+  googleFonts: {
+    families: {
+      Montserrat: true,
+    },
   },
 });

@@ -9,11 +9,7 @@
       "sizes": ["S", "M", "L", "XL"],
       "colors": ["Red", "White"],
       "rating": 4.8,
-      "images": [
-        "https://example.com/images/home_team_kit_front.jpg",
-        "https://example.com/images/home_team_kit_back.jpg",
-        "https://example.com/images/home_team_kit_side.jpg"
-      ]
+      "images": ["medium/starter-kit.webp", "medium/home-kit-back.webp"]
     },
     {
       "id": 2,
@@ -25,10 +21,7 @@
       "sizes": ["S", "M", "L", "XL", "XXL"],
       "colors": ["Blue", "Black"],
       "rating": 4.7,
-      "images": [
-        "https://example.com/images/away_team_kit_front.jpg",
-        "https://example.com/images/away_team_kit_back.jpg"
-      ]
+      "images": ["medium/away-kit.webp", "medium/away-kit-2.webp"]
     },
     {
       "id": 3,
@@ -40,10 +33,7 @@
       "sizes": ["One Size"],
       "colors": ["Red", "Blue", "Green"],
       "rating": 4.9,
-      "images": [
-        "https://example.com/images/team_scarf_1.jpg",
-        "https://example.com/images/team_scarf_2.jpg"
-      ]
+      "images": []
     },
     {
       "id": 4,
@@ -55,10 +45,7 @@
       "sizes": ["M", "L", "XL", "XXL"],
       "colors": ["Gray", "Black"],
       "rating": 4.6,
-      "images": [
-        "https://example.com/images/team_hoodie_front.jpg",
-        "https://example.com/images/team_hoodie_back.jpg"
-      ]
+      "images": []
     },
     {
       "id": 5,
@@ -70,9 +57,7 @@
       "sizes": ["One Size"],
       "colors": ["Red", "Blue"],
       "rating": 4.5,
-      "images": [
-        "https://example.com/images/captains_armband.jpg"
-      ]
+      "images": []
     },
     {
       "id": 6,
@@ -84,10 +69,7 @@
       "sizes": ["S", "M", "L", "XL"],
       "colors": ["White", "Green"],
       "rating": 4.7,
-      "images": [
-        "https://example.com/images/goalkeeper_gloves_1.jpg",
-        "https://example.com/images/goalkeeper_gloves_2.jpg"
-      ]
+      "images": []
     },
     {
       "id": 7,
@@ -99,10 +81,7 @@
       "sizes": ["Standard"],
       "colors": ["White", "Black"],
       "rating": 4.8,
-      "images": [
-        "https://example.com/images/official_match_ball_1.jpg",
-        "https://example.com/images/official_match_ball_2.jpg"
-      ]
+      "images": []
     },
     {
       "id": 8,
@@ -114,10 +93,7 @@
       "sizes": ["One Size"],
       "colors": ["Blue", "Black", "White"],
       "rating": 4.7,
-      "images": [
-        "https://example.com/images/team_cap_1.jpg",
-        "https://example.com/images/team_cap_2.jpg"
-      ]
+      "images": []
     },
     {
       "id": 9,
@@ -129,10 +105,7 @@
       "sizes": ["One Size"],
       "colors": ["Black", "Gray"],
       "rating": 4.8,
-      "images": [
-        "https://example.com/images/team_backpack_1.jpg",
-        "https://example.com/images/team_backpack_2.jpg"
-      ]
+      "images": []
     },
     {
       "id": 10,
@@ -144,10 +117,7 @@
       "sizes": ["One Size"],
       "colors": ["Red", "Blue"],
       "rating": 4.6,
-      "images": [
-        "https://example.com/images/team_beanie_1.jpg",
-        "https://example.com/images/team_beanie_2.jpg"
-      ]
+      "images": []
     }
   ]
   
