@@ -1,37 +1,38 @@
-import type { Product } from "~/types/product";
-
-type Cart = {
-  product: Product;
-  quantity: number;
-}[];
+import type { Cart } from "~/types/cart";
 
 export const useCartStore = defineStore(
   "cart",
   () => {
-    const cart = ref<Cart>([]);
+    const cart = ref<Cart[]>([]);
 
-    const addToCart = (product: Product, quantity = 1) => {
+    const addToCart = (data: Cart) => {
       const cartItem = cart.value.find(
-        (item) => item.product.id === product.id
+        (item) =>
+          item.product.id === data.product.id &&
+          item.options?.size === data.options?.size &&
+          item.options?.color === data.options?.color
       );
 
       if (cartItem) {
-        cartItem.quantity += quantity;
+        cartItem.quantity += data.quantity;
       } else {
-        cart.value.push({ product, quantity });
+        cart.value.push(data);
       }
     };
-    const removeFromCart = (product: Product, quantity = 1) => {
+    const removeFromCart = (data: Cart) => {
       const cartItem = cart.value.find(
-        (item) => item.product.id === product.id
+        (item) =>
+          item.product.id === data.product.id &&
+          item.options?.size === data.options?.size &&
+          item.options?.color === data.options?.color
       );
       if (!cartItem) return;
 
       if (cartItem.quantity > 1) {
-        cartItem.quantity -= quantity;
+        cartItem.quantity -= data.quantity;
       } else {
         cart.value = cart.value.filter(
-          (item) => item.product.id !== product.id
+          (item) => item.product.id !== data.product.id
         );
       }
     };
@@ -40,12 +41,10 @@ export const useCartStore = defineStore(
       cart.value.reduce((total, item) => (total += item.quantity), 0)
     );
     const totalCost = computed(() =>
-      cart.value
-        .reduce(
-          (total, item) => (total += item.quantity * item.product.price),
-          0
-        )
-        .toFixed(2)
+      cart.value.reduce(
+        (total, item) => (total += item.quantity * item.product.price),
+        0
+      )
     );
 
     const isProductInCart = (productId: number) =>

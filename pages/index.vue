@@ -60,7 +60,12 @@ const categories = computed(() => {
                     class="grow"
                     placeholder="Category" />
                 <USelectMenu v-model="filters.sizes" :options="filtersData.sizes" multiple placeholder="Size" class="grow" />
-                <USelectMenu v-model="filters.colors" :options="filtersData.colors" multiple placeholder="Color" class="grow" />
+                <USelectMenu v-model="filters.colors" :options="filtersData.colors" multiple placeholder="Color" class="grow">
+                    <template #option="{ option }">
+                        <span :class="['bg-green-400', 'inline-block h-2 w-2 flex-shrink-0 rounded-full']" aria-hidden="true" />
+                        <span class="truncate">{{ option }}</span>
+                    </template>
+                </USelectMenu>
             </div>
         </div>
         

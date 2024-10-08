@@ -39,19 +39,26 @@ const navitageToCheckout = async () => {
                     title="Your cart is empty!"
                     description="Return to store and find something to yourself!"
                 />
-                <div v-for="item in cart" :key="item.product.id" class="w-full flex space-x-4 items-center">
+                <div v-for="item in cart" :key="item.product.id" class="w-full flex space-x-4">
                     <NuxtImg :src="item.product.images[0]" width="128px" height="128px" format="webp" densities="x1" />
-                    <div class="grow space-y-2">
-                        <h4>{{ item.product.name }}</h4>
+                    <div class="grow space-y-2 flex flex-col my-4">
+                        <div class="grow">
+                            <h4 class="font-semibold">{{ item.product.name }}</h4>
+                            <div v-if="item.options" class="text-sm">
+                                <div v-if="item.options.size">Size: {{ item.options.size }}</div>
+                                <div v-if="item.options.color">Color: {{ item.options.color }}</div>
+                            </div>
+                        </div>
+                        
                         <div class="flex justify-between items-center space-x-2 text-lg">
                             <span>{{ item.product.price }} &euro;</span>
                             <div class="flex items-center space-x-2">
                                 <UButton
                                     color="rose" variant="soft"
                                     :icon="item.quantity > 1 ? 'i-heroicons-minus-20-solid' : 'i-heroicons-trash-20-solid'"
-                                    @click="removeFromCart(item.product)" />
+                                    @click="removeFromCart(item)" />
                                 <small>x{{ item.quantity }}</small>
-                                <UButton color="rose" variant="soft" icon="i-heroicons-plus-20-solid" @click="addToCart(item.product)" />
+                                <UButton color="rose" variant="soft" icon="i-heroicons-plus-20-solid" @click="addToCart(item)" />
                             </div>
                             <strong>{{ item.product.price * item.quantity }} &euro;</strong>
                         </div>
@@ -62,7 +69,7 @@ const navitageToCheckout = async () => {
             <template #footer>
                 <div class="flex items-center" :class="totalCost > 0 ? 'justify-between' : 'justify-end'">
                     <div v-if="totalCost > 0">
-                        Total: <strong>{{ totalCost }} &euro;</strong>
+                        Total: <strong>{{ totalCost.toFixed(2) }} &euro;</strong>
                     </div>
                     <UButton class="order-last" color="rose" size="lg" :disabled="totalCost === 0" @click="navitageToCheckout">Checkout</UButton>
                 </div>

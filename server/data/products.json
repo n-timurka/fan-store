@@ -7,7 +7,6 @@
       "category": "Kits",
       "description": "Official home team kit for the 2024 season. Made from lightweight, breathable fabric to keep you cool on and off the field.",
       "sizes": ["S", "M", "L", "XL"],
-      "colors": ["Red", "White"],
       "rating": 4.8,
       "images": ["medium/starter-kit.webp", "medium/home-kit-back.webp"]
     },
@@ -19,7 +18,6 @@
       "category": "Kits",
       "description": "The official away team kit for the 2024 season, designed with durable fabric and moisture-wicking technology.",
       "sizes": ["S", "M", "L", "XL", "XXL"],
-      "colors": ["Blue", "Black"],
       "rating": 4.7,
       "images": ["medium/away-kit.webp", "medium/away-kit-2.webp"]
     },
@@ -30,7 +28,6 @@
       "price": 19.99,
       "category": "Accessories",
       "description": "Show your support with this stylish team scarf. Perfect for match days or keeping warm during winter.",
-      "sizes": ["One Size"],
       "colors": ["Red", "Blue", "Green"],
       "rating": 4.9,
       "images": []
@@ -54,7 +51,6 @@
       "price": 12.99,
       "category": "Accessories",
       "description": "Limited edition captain's armband with the team's colors. A perfect gift for any team fan!",
-      "sizes": ["One Size"],
       "colors": ["Red", "Blue"],
       "rating": 4.5,
       "images": []
@@ -78,7 +74,6 @@
       "price": 49.99,
       "category": "Equipment",
       "description": "Official match ball used by the team during the 2024 season. High durability and perfect for all weather conditions.",
-      "sizes": ["Standard"],
       "colors": ["White", "Black"],
       "rating": 4.8,
       "images": []
@@ -90,7 +85,6 @@
       "price": 24.99,
       "category": "Accessories",
       "description": "Stay cool and support the team with this adjustable cap, featuring an embroidered team logo.",
-      "sizes": ["One Size"],
       "colors": ["Blue", "Black", "White"],
       "rating": 4.7,
       "images": []
@@ -102,7 +96,6 @@
       "price": 39.99,
       "category": "Accessories",
       "description": "Durable and spacious team backpack, perfect for carrying your gear on match day.",
-      "sizes": ["One Size"],
       "colors": ["Black", "Gray"],
       "rating": 4.8,
       "images": []
@@ -114,7 +107,6 @@
       "price": 14.99,
       "category": "Accessories",
       "description": "Keep warm during the colder months while supporting your favorite team with this beanie.",
-      "sizes": ["One Size"],
       "colors": ["Red", "Blue"],
       "rating": 4.6,
       "images": []
