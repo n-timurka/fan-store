@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    font-family: Montserrat, sans-serif;
+}
+
+@layer components {
+    body {
+        @apply text-slate-600;
+    }
+
+    .header-1 {
+        @apply text-3xl font-semibold mb-4 text-black;
+    }
+    .header-2 {
+        @apply text-2xl font-semibold mb-4;
+    }
+    .header-3 {
+        @apply text-xl font-semibold mb-3;
+    }
+    .header-4 {
+        @apply font-semibold uppercase mb-2;
+    }
+}

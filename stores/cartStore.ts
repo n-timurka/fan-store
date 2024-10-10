@@ -36,6 +36,9 @@ export const useCartStore = defineStore(
         );
       }
     };
+    const clearCart = () => {
+      cart.value = [];
+    };
 
     const productsNumber = computed(() =>
       cart.value.reduce((total, item) => (total += item.quantity), 0)
@@ -47,6 +50,8 @@ export const useCartStore = defineStore(
       )
     );
 
+    const productItemsNumber = (productId: number) =>
+      cart.value.filter((item) => item.product.id === productId).length;
     const isProductInCart = (productId: number) =>
       cart.value.some((item) => item.product.id === productId);
 
@@ -55,6 +60,8 @@ export const useCartStore = defineStore(
       addToCart,
       removeFromCart,
       isProductInCart,
+      clearCart,
+      productItemsNumber,
       productsNumber,
       totalCost,
     };

@@ -63,7 +63,6 @@ const onSubmit = async (event: FormSubmitEvent<Schema>) => {
       method: 'POST',
     });
 
-    console.log(stripe)
     await stripe.value.redirectToCheckout({ sessionId: order.sessionId })
   } catch (e) {
     console.log(e, typeof e)
@@ -78,7 +77,8 @@ const onSubmit = async (event: FormSubmitEvent<Schema>) => {
     <main class="container mx-auto my-8 px-4 md:px-0">
       <h1 class="text-2xl font-semibold mb-4">Checkout</h1>
 
-      <div class="flex justify-between space-x-6">
+      <UAlert v-if="!cart.length" icon="i-heroicons-exclamation-circle-20-solid" title="You have nothing in your cart. Put something there first" />
+      <div v-else class="flex justify-between space-x-6">
         <UCard class="flex-1">
           <UForm id="checkout-form" :schema="schema" :state="state" @submit.prevent="onSubmit">
             <div class="flex space-x-8">
@@ -130,7 +130,7 @@ const onSubmit = async (event: FormSubmitEvent<Schema>) => {
             <div class="flex justify-end items-center space-x-4">
               <div v-if="error" class="text-sm text-red-600">{{ error }}</div>
               <UButton type="submit" form="checkout-form" :loading="isLoading" color="rose" variant="solid" size="lg">
-                Complete
+                Go to Payment
               </UButton>
             </div>
           </template>
@@ -158,11 +158,11 @@ const onSubmit = async (event: FormSubmitEvent<Schema>) => {
                     </div>
                     
                     <div class="flex justify-between items-center space-x-2 text-lg">
-                        <span>{{ item.product.price }} &euro;</span>
+                        <span>&euro;{{ item.product.price }}</span>
                         <div class="flex items-center space-x-2">
                             <small>x{{ item.quantity }}</small>
                         </div>
-                        <strong>{{ item.product.price * item.quantity }} &euro;</strong>
+                        <strong>&euro;{{ item.product.price * item.quantity }}</strong>
                     </div>
                 </div>
               </div>
@@ -171,7 +171,7 @@ const onSubmit = async (event: FormSubmitEvent<Schema>) => {
             <template #footer>
               <div class="pt-2 flex justify-between">
                 <div>Total:</div>
-                <div class="font-semibold">&euro;{{ totalCost }}</div>
+                <div class="font-semibold">&euro;{{ totalCost.toFixed(2) }}</div>
               </div>
             </template>
           </UCard>

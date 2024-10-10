@@ -29,6 +29,18 @@ export default defineNuxtConfig({
       Montserrat: true,
     },
   },
+  tailwindcss: {
+    cssPath: "~/assets/css/main.css",
+    config: {
+      theme: {
+        extend: {
+          colors: {
+            primary: "#e11d48",
+          },
+        },
+      },
+    },
+  },
   stripe: {
     server: {
       key: process.env.STRIPE_SERVER_KEY,

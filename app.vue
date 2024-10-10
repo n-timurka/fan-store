@@ -1,6 +1,6 @@
 <template>
   <div class="min-h-screen flex flex-col">
-    <NuxtLoadingIndicator class="bg-rose-600" />
+    <NuxtLoadingIndicator class="bg-primary" />
 
     <TheHeader />
 
@@ -13,9 +13,3 @@
     <UNotifications />
   </div>
 </template>
-
-<style>
-body {
-  font-family: Montserrat;
-}
-</style>

@@ -47,7 +47,7 @@ const categories = computed(() => {
 <template>
     <main class="container mx-auto my-8 px-4 md:px-0">
         <div class="md:flex justify-between items-center mb-8">
-            <h1 class="text-2xl font-semibold mb-4 md:mb-0">
+            <h1 class="header-2 mb-0">
                 Products
             </h1>
 

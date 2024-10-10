@@ -7,13 +7,14 @@ defineProps<{
 
 <template>
     <div class="flex space-x-2">
-        <UButton
-         v-for="size in options"
-            :key="size"
-            :color="size === modelValue ? 'rose' : 'white'"
-            variant="solid"
-            @click="modelValue = size">
-            {{ size }}
-        </UButton>
+        <div v-for="size in options" :key="size" class="w-10">
+            <UButton
+                :color="size === modelValue ? 'rose' : 'white'"
+                variant="solid"
+                block
+                @click="modelValue = size">
+                {{ size }}
+            </UButton>
+        </div>
     </div>
 </template>

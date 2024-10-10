@@ -14,17 +14,12 @@ const isCartOpen = ref(false)
           to="/"
           class="font-semibold text-xl text-white hover:text-rose-100 flex items-center space-x-2"
         >
-          <NuxtImg src="./images/logo.webp" width="40px" height="40px" />
+          <UIcon name="i-ph-beach-ball-fill" class="w-8 h-8 text-rose-100" />
           <span>FanStore</span>
         </NuxtLink>
 
         <div class="flex space-x-6 items-center">
-          <nav class="flex space-x-2">
-            <UButton color="white" variant="link" :to="{ name: 'categories-name', params: { name: 'kits' }}">Kits</UButton>
-            <UButton color="white" variant="link" :to="{ name: 'categories-name', params: { name: 'accessories' }}">Accessories</UButton>
-            <UButton color="white" variant="link" :to="{ name: 'categories-name', params: { name: 'clothing' }}">Clothing</UButton>
-            <UButton color="white" variant="link" :to="{ name: 'categories-name', params: { name: 'equipment' }}">Equipment</UButton>
-          </nav>
+          <TheMenu />
 
           <div v-if="route.name !== 'checkout'" class="flex space-x-2">
             <UChip :text="totalProducts" size="2xl" color="rose" :show="totalProducts > 0">
