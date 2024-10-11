@@ -55,7 +55,7 @@ const isProductInCart = computed(() => cart.value.some(item => item.product.id =
 
             <div class="flex justify-between items-center space-x-4">
                 <AppSizeCheck v-if="product.sizes" v-model="size" :options="product.sizes" class="grow" />
-                <USelectMenu v-if="product.colors" v-model="color" :options="product.colors" placeholder="Color" class="grow" />
+                <AppColorCheck v-if="product.colors" v-model="color" :options="product.colors" class="grow" />
             </div>
 
             <AppRating :value="product.rating" :max="5" />

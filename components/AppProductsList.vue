@@ -27,7 +27,12 @@ defineProps({
                         <div class="font-semibold text-lg">&euro;{{ product.price }}</div>
                     </div>
                     <div class="w-12">
-                        <UButton color="rose" icon="i-heroicons-shopping-cart-20-solid" block class="h-full" />
+                        <UButton
+                            color="rose"
+                            icon="i-heroicons-shopping-cart-20-solid"
+                            block
+                            class="h-full"
+                            :to="{ name: 'products-slug', params: { slug: product.slug } }" />
                     </div>
                 </div>
             </div>

@@ -118,7 +118,7 @@ const isProductInCart = computed(() => cart.value.some(item => item.product.id =
             </div>
             <div v-if="product.colors" class="flex-1">
               <label>Available colors:</label>
-              <USelect v-model="selectedSize" :options="product.colors" />
+              <AppColorCheck v-model="selectedColor" :options="product.colors" />
             </div>
           </div>
           <UDivider />

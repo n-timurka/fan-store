@@ -38,6 +38,6 @@ const links = [
         <UHorizontalNavigation
             :links="links"
             class="md:flex hidden"
-            :ui="{ base: 'text-white hover:text-white hover:underline hover:before:bg-transparent' }" />
+            :ui="{ base: 'text-white hover:text-white hover:underline hover:before:bg-transparent', active: 'after:bg-transparent' }" />
     </nav>
 </template>

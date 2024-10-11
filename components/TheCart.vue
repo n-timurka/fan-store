@@ -40,7 +40,8 @@ const navitageToCheckout = async () => {
                     description="Return to store and find something to yourself!"
                 />
                 <div v-for="item in cart" :key="item.product.id" class="w-full flex space-x-4">
-                    <NuxtImg :src="item.product.images[0]" width="128px" height="128px" format="webp" densities="x1" />
+                    <AppProductImage :images="item.product.images" size="128px" />
+                    
                     <div class="grow space-y-2 flex flex-col my-4">
                         <div class="grow">
                             <h4 class="font-semibold">{{ item.product.name }}</h4>

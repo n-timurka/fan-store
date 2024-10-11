@@ -18,6 +18,7 @@
     "@nuxtjs/google-fonts": "^3.2.0",
     "@pinia/nuxt": "^0.5.5",
     "@unlok-co/nuxt-stripe": "^3.0.0",
+    "aws-amplify": "^6.6.4",
     "nuxt": "^3.13.0",
     "pinia": "^2.2.4",
     "pinia-plugin-persistedstate": "^4.1.1",
@@ -27,5 +28,15 @@
   },
   "overrides": {
     "vue": "latest"
+  },
+  "devDependencies": {
+    "@aws-amplify/backend": "^1.4.0",
+    "@aws-amplify/backend-cli": "^1.2.9",
+    "aws-cdk": "^2.161.1",
+    "aws-cdk-lib": "^2.161.1",
+    "constructs": "^10.3.0",
+    "esbuild": "^0.24.0",
+    "tsx": "^4.19.1",
+    "typescript": "^5.6.3"
   }
 }
