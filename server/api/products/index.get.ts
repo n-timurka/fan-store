@@ -1,8 +1,13 @@
 import products from "@/server/data/products.json";
 import { useS3Client } from "@/server/utils/s3";
+// import type { Schema } from "~/amplify/data/resource";
+// import { generateClient } from "aws-amplify/data";
 
 export default defineEventHandler(async (event) => {
   const { category, sizes, colors } = getQuery(event);
+
+  // const client = generateClient<Schema>();
+  // const { data: items, errors } = await client.models.Product.list();
 
   const config = useRuntimeConfig(event);
   const { getSignedImageUrl } = useS3Client({

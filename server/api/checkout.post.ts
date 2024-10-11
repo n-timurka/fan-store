@@ -1,10 +1,23 @@
 import { useServerStripe } from "#stripe/server";
 import type { Cart } from "~/types/cart";
+import type { Schema } from "~/amplify/data/resource";
+import { generateClient } from "aws-amplify/data";
 
 export default defineEventHandler(async (event) => {
   // Get the data from the request body
   const { products, data } = await readBody(event);
-  console.log(data);
+
+  // Create an order and save to DB
+  const client = generateClient<Schema>();
+  await client.models.Order.create({
+    customer: {
+      email: data.email,
+      name: data.name,
+      phone: data.phone,
+    },
+    status: "NEW",
+  });
+  // TODO create order products
 
   // Create Stripe object
   const stripe = await useServerStripe(event);
