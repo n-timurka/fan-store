@@ -147,7 +147,9 @@ const onSubmit = async (event: FormSubmitEvent<Schema>) => {
 
             <div class="space-y-4">
               <div v-for="item in cart" :key="item.product.id" class="w-full flex space-x-4">
-                <NuxtImg :src="item.product.images[0]" width="128px" height="128px" format="webp" densities="x1" />
+                <NuxtImg v-if="item.product.images.length" :src="item.product.images[0]" width="128px" height="128px" format="webp" densities="x1" />
+                <USkeleton v-else class="w-32 h-32" />
+
                 <div class="grow space-y-2 flex flex-col my-4">
                     <div class="grow">
                         <h4 class="font-semibold">{{ item.product.name }}</h4>

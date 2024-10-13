@@ -4,18 +4,18 @@ import type { Product } from '~/types/product';
 
 const { slug } = useRoute().params
 
-const { data: product } = await useLazyFetch<Product>(`/api/products/${slug}`);
+const { data: product } = await useFetch<Product>(() => `/api/products/${slug}`);
 if (!product.value) {
     throw createError({
       statusCode: 404,
       statusMessage: 'Page Not Found'
     })
 }
-const { data: categoryProducts } = await useLazyFetch<Product[]>('/api/products', {
+
+const { data } = await useFetch('/api/products', {
   query: { category: product.value.category },
 })
-
-const relatedProducts = computed(() => categoryProducts.value?.filter(p => p.id !== product.value?.id))
+const relatedProducts = computed(() => data.value?.products.filter(p => p.id !== product.value?.id))
 
 const toast = useToast()
 const cartStore = useCartStore();
@@ -36,7 +36,7 @@ useHead({
     { property: 'og:description', content: product.value.description },
     // { property: 'og:image', content: product.value.image },
     { property: 'og:type', content: 'product' },
-    { name: 'twitter:card', content: 'summary_large_image' },
+    // { name: 'twitter:card', content: 'summary_large_image' },
     { name: 'twitter:title', content: `${product.value.name} - Buy Now | Sports Team Fan Store` },
     { name: 'twitter:description', content: product.value.description },
     // { name: 'twitter:image', content: product.value.image }
@@ -52,7 +52,7 @@ const links = computed(() => {
     },
     {
       label: product.value.category,
-      to: { name: 'categories-name', params: { name: product.value.category } }
+      to: { name: 'categories-slug', params: { slug: product.value.category } }
     },
     {
       label: product.value.name,

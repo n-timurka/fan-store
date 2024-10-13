@@ -1,22 +1,15 @@
 <script setup lang="ts">
-const modelValue = defineModel<string>()
+import type { ProductColorEnum } from '~/types/enums';
+import { productColorCodes } from '~/types/productColors';
 
+const modelValue = defineModel<ProductColorEnum>()
 const props = defineProps<{
-    options: string[],
+    options: ProductColorEnum[],
 }>()
-
-const colors: Record<string,string> = {
-    "Red": "#dc2626",
-    "White": "#f8fafc",
-    "Black": "#000000",
-    "Blue": "#2563eb",
-    "Green": "#16a34a",
-    "Gray": "#9ca3af",
-}
 
 const optionsList = computed(() => props.options.map(option => ({
     value: option,
-    label: colors[option],
+    label: productColorCodes[option],
 })))
 </script>
 
@@ -31,12 +24,4 @@ const optionsList = computed(() => props.options.map(option => ({
             </template>
         </URadio>
     </div>
-    <!-- <URadioGroup v-model="modelValue" :options="optionsList" :ui="{ container: 'hidden', fieldset: 'flex space-x-2 items-center' }">
-        <template #label="{ option }">
-            <span
-                class="ring-2 ring-offset-2 h-5 w-5 rounded-full inline-flex cursor-pointer"
-                :class="[option.selected ? 'ring-rose-600' : 'ring-transparent' ]"
-                :style="{ backgroundColor: option.label }" />
-        </template>
-    </URadioGroup> -->
 </template>

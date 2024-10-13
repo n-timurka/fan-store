@@ -1,3 +1,7 @@
+<script setup lang="ts">
+const categoriesStore = useCategoriesStore()
+</script>
+
 <template>
     <footer class="w-full">
       <section class="bg-slate-200">
@@ -17,17 +21,10 @@
             <div class="basis-1/2 md:flex-1">
               <h4 class="header-4">Shop</h4>
               <ul class="text-slate-400 text-sm space-y-1">
-                <li>
-                  <UButton color="gray" :padded="false" variant="link" to="/">Kits</UButton>
-                </li>
-                <li>
-                  <UButton color="gray" :padded="false" variant="link" to="/">Accessories</UButton>
-                </li>
-                <li>
-                  <UButton color="gray" :padded="false" variant="link" to="/">Clothing</UButton>
-                </li>
-                <li>
-                  <UButton color="gray" :padded="false" variant="link" to="/">Equipment</UButton>
+                <li v-for="category in categoriesStore.categories" :key="category.id">
+                  <UButton color="gray" :padded="false" variant="link" :to="{ name: 'categories-slug', params: { slug: category.slug } }">
+                    {{ category.name }}
+                  </UButton>
                 </li>
               </ul>
             </div>

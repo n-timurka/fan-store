@@ -1,26 +1,23 @@
 import products from "@/server/data/products.json";
 import { useS3Client } from "@/server/utils/s3";
-// import type { Schema } from "~/amplify/data/resource";
-// import { generateClient } from "aws-amplify/data";
+import { ProductsSortEnum } from "~/types/enums";
 
 export default defineEventHandler(async (event) => {
-  const { category, sizes, colors } = getQuery(event);
+  const { category, sizes, colors, sort, page, perPage, min, max } = getQuery(event);
 
-  // const client = generateClient<Schema>();
-  // const { data: items, errors } = await client.models.Product.list();
+  const productsItems = category
+    ? products.filter((product) => product.category === category)
+    : products;
 
-  const config = useRuntimeConfig(event);
-  const { getSignedImageUrl } = useS3Client({
-    keyId: config.awsKeyId,
-    secretKey: config.awsSecretAccessKey,
-    region: config.awsRegion,
-    bucket: config.awsBucketName,
+  // Save potential filters values
+  const filters = { sizes: new Set(), colors: new Set() };
+  productsItems.forEach((product) => {
+    product.colors?.forEach((color) => filters.colors.add(color));
+    product.sizes?.forEach((size) => filters.sizes.add(size));
   });
 
-  const filteredProducts = products.filter((product) => {
-    // Check category filter
-    const categoryMatch = category ? product.category === category : true;
-
+  // Filtration
+  let filteredProducts = productsItems.filter((product) => {
     // Check sizes filter (if sizes are provided, check if the product has any of those sizes)
     const sizeMatch = sizes
       ? Array.isArray(sizes)
@@ -39,11 +36,57 @@ export default defineEventHandler(async (event) => {
         : product.colors && product.colors.includes(colors as string)
       : true;
 
+    // Check min price
+    const priceMinMatch = min ? product.price >= Number(min) : true;
+
+    // Check max price
+    const priceMaxMatch = max? product.price <= Number(max) : true;
+
     // Return true if all conditions match
-    return categoryMatch && sizeMatch && colorMatch;
+    return sizeMatch && colorMatch && priceMinMatch && priceMaxMatch;
   });
 
-  return Promise.all(
+  const total = filteredProducts.length;
+  const pricesArray = filteredProducts.map(product => product.price)
+  const minPrice = Math.min(...pricesArray)
+  const maxPrice = Math.max(...pricesArray)
+
+  // Sorting
+  switch (sort) {
+    case ProductsSortEnum.A_Z:
+      filteredProducts.sort((a, b) => a.name.localeCompare(b.name))
+      break;
+    case ProductsSortEnum.Z_A:
+      filteredProducts.sort((a, b) => b.name.localeCompare(a.name))
+      break;
+    case ProductsSortEnum.CHEAP_FIRST:
+      filteredProducts.sort((a, b) => a.price - b.price)
+      break;
+    case ProductsSortEnum.CHEAP_LAST:
+      filteredProducts.sort((a, b) => b.price - a.price)
+      break;
+    case ProductsSortEnum.LESS_RATED:
+      filteredProducts.sort((a, b) => a.rating - b.rating)
+      break;
+    case ProductsSortEnum.MOST_RATED:
+      filteredProducts.sort((a, b) => b.rating - a.rating)
+      break;
+  }
+
+  // Pagination
+  if (page && perPage) {
+    filteredProducts = filteredProducts.slice((+page - 1) * +perPage, +page * +perPage)
+  }
+
+  const config = useRuntimeConfig(event);
+  const { getSignedImageUrl } = useS3Client({
+    keyId: config.awsKeyId,
+    secretKey: config.awsSecretAccessKey,
+    region: config.awsRegion,
+    bucket: config.awsBucketName,
+  });
+
+  const productsList = await Promise.all(
     filteredProducts.map(async (product) => ({
       ...product,
       images: await Promise.all(
@@ -51,4 +94,15 @@ export default defineEventHandler(async (event) => {
       ),
     }))
   );
+
+  return {
+    products: productsList,
+    total,
+    minPrice,
+    maxPrice,
+    filters: {
+      colors: [...filters.colors] as string[],
+      sizes: [...filters.sizes] as string[],
+    },
+  };
 });

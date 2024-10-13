@@ -20,15 +20,10 @@ export default defineNuxtConfig({
     "@unlok-co/nuxt-stripe",
     "@nuxt/ui",
     "@nuxt/eslint",
-    "@nuxtjs/google-fonts",
     "@pinia/nuxt",
     "pinia-plugin-persistedstate/nuxt",
+    "@nuxt/fonts",
   ],
-  googleFonts: {
-    families: {
-      Montserrat: true,
-    },
-  },
   tailwindcss: {
     cssPath: "~/assets/css/main.css",
   },

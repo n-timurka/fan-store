@@ -1,0 +1,31 @@
+[
+    {
+      "id": 1,
+      "name": "Kits",
+      "slug": "kits",
+      "description": "Shop the latest home and away team kits. Official jerseys from your favorite teams for the 2024 season.",
+      "image": "https://example.com/images/kits-category.jpg"
+    },
+    {
+      "id": 2,
+      "name": "Accessories",
+      "slug": "accessories",
+      "description": "Find a variety of team accessories like scarves, caps, and other fan gear to show your support.",
+      "image": "https://example.com/images/accessories-category.jpg"
+    },
+    {
+      "id": 3,
+      "name": "Clothing",
+      "slug": "clothing",
+      "description": "Discover stylish and comfortable team apparel including hoodies, t-shirts, and more.",
+      "image": "https://example.com/images/clothing-category.jpg"
+    },
+    {
+      "id": 4,
+      "name": "Equipment",
+      "slug": "equipment",
+      "description": "Official match balls, goalkeeper gloves, and more gear to improve your game.",
+      "image": "https://example.com/images/equipment-category.jpg"
+    }
+  ]
+  

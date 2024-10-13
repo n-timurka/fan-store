@@ -1,3 +1,5 @@
+import type { ProductColorEnum } from "./enums";
+
 export type Product = {
   id: number;
   name: string;
@@ -5,7 +7,7 @@ export type Product = {
   description: string;
   price: number;
   category: string;
-  colors: string[];
+  colors: ProductColorEnum[];
   sizes: string[];
   rating: number;
   images: string[];
