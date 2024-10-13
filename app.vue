@@ -1,3 +1,8 @@
+<script setup lang="ts">
+const { FetchCategories } = useCategoriesStore()
+await FetchCategories()
+</script>
+
 <template>
   <div class="min-h-screen flex flex-col">
     <NuxtLoadingIndicator class="bg-primary" />
@@ -10,6 +15,6 @@
     
     <TheFooter />
     
-    <UNotifications />
+    <UNotifications color="rose" />
   </div>
 </template>
