@@ -3,7 +3,8 @@ import { useS3Client } from "@/server/utils/s3";
 import { ProductsSortEnum } from "~/types/enums";
 
 export default defineEventHandler(async (event) => {
-  const { category, sizes, colors, sort, page, perPage, min, max } = getQuery(event);
+  const { category, sizes, colors, sort, page, perPage, min, max } =
+    getQuery(event);
 
   const productsItems = category
     ? products.filter((product) => product.category === category)
@@ -40,42 +41,45 @@ export default defineEventHandler(async (event) => {
     const priceMinMatch = min ? product.price >= Number(min) : true;
 
     // Check max price
-    const priceMaxMatch = max? product.price <= Number(max) : true;
+    const priceMaxMatch = max ? product.price <= Number(max) : true;
 
     // Return true if all conditions match
     return sizeMatch && colorMatch && priceMinMatch && priceMaxMatch;
   });
 
   const total = filteredProducts.length;
-  const pricesArray = filteredProducts.map(product => product.price)
-  const minPrice = Math.min(...pricesArray)
-  const maxPrice = Math.max(...pricesArray)
+  const pricesArray = filteredProducts.map((product) => product.price);
+  const minPrice = Math.min(...pricesArray);
+  const maxPrice = Math.max(...pricesArray);
 
   // Sorting
   switch (sort) {
     case ProductsSortEnum.A_Z:
-      filteredProducts.sort((a, b) => a.name.localeCompare(b.name))
+      filteredProducts.sort((a, b) => a.name.localeCompare(b.name));
       break;
     case ProductsSortEnum.Z_A:
-      filteredProducts.sort((a, b) => b.name.localeCompare(a.name))
+      filteredProducts.sort((a, b) => b.name.localeCompare(a.name));
       break;
     case ProductsSortEnum.CHEAP_FIRST:
-      filteredProducts.sort((a, b) => a.price - b.price)
+      filteredProducts.sort((a, b) => a.price - b.price);
       break;
     case ProductsSortEnum.CHEAP_LAST:
-      filteredProducts.sort((a, b) => b.price - a.price)
+      filteredProducts.sort((a, b) => b.price - a.price);
       break;
     case ProductsSortEnum.LESS_RATED:
-      filteredProducts.sort((a, b) => a.rating - b.rating)
+      filteredProducts.sort((a, b) => a.rating - b.rating);
       break;
     case ProductsSortEnum.MOST_RATED:
-      filteredProducts.sort((a, b) => b.rating - a.rating)
+      filteredProducts.sort((a, b) => b.rating - a.rating);
       break;
   }
 
   // Pagination
   if (page && perPage) {
-    filteredProducts = filteredProducts.slice((+page - 1) * +perPage, +page * +perPage)
+    filteredProducts = filteredProducts.slice(
+      (+page - 1) * +perPage,
+      +page * +perPage
+    );
   }
 
   const config = useRuntimeConfig(event);
@@ -89,9 +93,11 @@ export default defineEventHandler(async (event) => {
   const productsList = await Promise.all(
     filteredProducts.map(async (product) => ({
       ...product,
-      images: await Promise.all(
-        product.images.map(async (image) => await getSignedImageUrl(image))
-      ),
+      images: product.images
+        ? await Promise.all(
+            product.images.map(async (image) => await getSignedImageUrl(image))
+          )
+        : [],
     }))
   );
 

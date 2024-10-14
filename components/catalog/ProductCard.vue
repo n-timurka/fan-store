@@ -43,7 +43,7 @@ const isProductInCart = computed(() => cart.value.some(item => item.product.id =
 </script>
 
 <template>
-    <UCard>
+    <UCard :ui="{ divide: 'divide-none', body: { padding: 'sm:py-0' } }">
         <template #header>
             <NuxtLink :to="{ name: 'products-slug', params: { slug: product.slug } }" class="font-semibold hover:border-b">
                 {{ product.name }}

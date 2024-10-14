@@ -1,5 +1,5 @@
 <template>
-    <section class="relative bg-cover bg-center h-[80vh] text-white" :style="{ backgroundImage: 'url(/images/hero.webp)' }">
+    <section class="relative bg-cover bg-center h-96 md:h-[80vh] text-white" :style="{ backgroundImage: 'url(/images/hero.webp)' }">
         <div class="absolute inset-0 bg-slate-600/65 flex items-center justify-center">
           <div class="text-center max-w-2xl">
             <!-- Main Heading -->

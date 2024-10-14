@@ -16,7 +16,7 @@ defineProps<{
             :arrows="images.length > 1">
             <NuxtImg :src="item" :width="size" :height="size" format="webp" densities="x1" />
         </UCarousel>
-        <div v-else class="bg-slate-100 h-80 w-full mb-4 flex justify-center items-center">
+        <div v-else class="bg-slate-100 w-full mb-4 flex justify-center items-center" :class="`h-[${size}]`">
             <UIcon name="i-heroicons-no-symbol-20-solid" class="w-32 h-32 bg-slate-300" />
         </div>
     </section>

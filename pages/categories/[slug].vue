@@ -40,7 +40,7 @@ type ProductsListResponse = {
 }
 const { data, status } = await useLazyFetch<ProductsListResponse>('/api/products', {
     query: {
-      // category: category.value.name,
+      category: category.value.name,
       min,
       max,
       colors,
