@@ -39,11 +39,16 @@ const navitageToCheckout = async () => {
                     title="Your cart is empty!"
                     description="Return to store and find something to yourself!"
                 />
-                <div v-for="item in cart" :key="item.product.id" class="w-full flex space-x-4">
+                <div v-for="item in cart" :key="item.product.id" class="relative w-full flex">
+                    <UButton
+                        icon="i-heroicons-x-mark-20-solid"
+                        :ui="{ rounded: 'rounded-full' }"
+                        color="rose" class="absolute -top-4 -left-4 z-10"
+                        @click="removeFromCart(item)" />
                     <NuxtImg v-if="item.product.images.length" :src="item.product.images[0]" width="128px" height="128px" format="webp" densities="x1" />
                     <USkeleton v-else class="w-32 h-32" />
 
-                    <div class="grow space-y-2 flex flex-col my-4">
+                    <div class="grow space-y-2 flex flex-col my-4 ml-4">
                         <div class="grow">
                             <h4 class="font-semibold">{{ item.product.name }}</h4>
                             <div v-if="item.options" class="text-sm">
@@ -56,8 +61,9 @@ const navitageToCheckout = async () => {
                             <span>{{ item.product.price }} &euro;</span>
                             <div class="flex items-center space-x-2">
                                 <UButton
-                                    color="rose" variant="soft"
-                                    :icon="item.quantity > 1 ? 'i-heroicons-minus-20-solid' : 'i-heroicons-trash-20-solid'"
+                                    color="rose"
+                                    variant="soft"
+                                    icon="i-heroicons-minus-20-solid"
                                     @click="removeFromCart(item)" />
                                 <small>x{{ item.quantity }}</small>
                                 <UButton color="rose" variant="soft" icon="i-heroicons-plus-20-solid" @click="addToCart(item)" />

@@ -18,7 +18,7 @@ const isCartOpen = ref(false)
           <span>FanStore</span>
         </NuxtLink>
 
-        <div class="flex space-x-6 items-center">
+        <div class="flex space-x-4 md:space-x-6 items-center">
           <TheMenu />
 
           <div v-if="route.name !== 'checkout'" class="flex space-x-2">

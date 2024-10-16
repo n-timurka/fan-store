@@ -13,6 +13,7 @@ const decreaseQuantity = () => {
         v-model="modelValue"
         :ui="{ icon: { trailing: { pointer: '' }, leading: { pointer: '' } } }"
         minlength="1"
+        color="rose"
         autocomplete="off">
         <template #leading>
             <UButton color="rose" variant="ghost" icon="i-heroicons-minus-20-solid" :disabled="modelValue < 2" :padded="false" @click="decreaseQuantity" />

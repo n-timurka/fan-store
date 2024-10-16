@@ -30,7 +30,7 @@
       "description": "Show your support with this stylish team scarf. Perfect for match days or keeping warm during winter.",
       "colors": ["Red", "Blue", "Green"],
       "rating": 4.9,
-      "images": []
+      "images": ["medium/scarf.webp"]
     },
     {
       "id": 4,
@@ -42,12 +42,12 @@
       "sizes": ["M", "L", "XL", "XXL"],
       "colors": ["Gray", "Black"],
       "rating": 4.6,
-      "images": []
+      "images": ["medium/hoodie.webp"]
     },
     {
       "id": 5,
-      "name": "Limited Edition Captain's Armband",
-      "slug": "limited-edition-captains-armband",
+      "name": "Captain's Armband",
+      "slug": "captains-armband",
       "price": 12.99,
       "category": "Accessories",
       "description": "Limited edition captain's armband with the team's colors. A perfect gift for any team fan!",

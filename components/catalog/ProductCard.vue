@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { ProductColorEnum } from '~/types/enums';
 import type { Product } from '~/types/product';
 
 const props = defineProps<{
@@ -12,7 +13,7 @@ const { cart } = storeToRefs(cartStore)
 const toast = useToast()
 
 const size = ref<string>()
-const color = ref<string>()
+const color = ref<ProductColorEnum>()
 
 watch(
     () => props.product,
@@ -43,27 +44,31 @@ const isProductInCart = computed(() => cart.value.some(item => item.product.id =
 </script>
 
 <template>
-    <UCard :ui="{ divide: 'divide-none', body: { padding: 'sm:py-0' } }">
+    <UCard :ui="{ divide: 'divide-none', body: { padding: 'px-6 py-0 md:py-0' } }">
         <template #header>
-            <NuxtLink :to="{ name: 'products-slug', params: { slug: product.slug } }" class="font-semibold hover:border-b">
-                {{ product.name }}
-            </NuxtLink>
+            <h4 class="w-full truncate">
+                <NuxtLink
+                    :to="{ name: 'products-slug', params: { slug: product.slug } }"
+                    class="px-2 text-xl md:text-base font-semibold hover:border-b">
+                    {{ product.name }}
+                </NuxtLink>
+            </h4>
         </template>
 
         <section class="space-y-4">
             <AppProductImage :images="product.images" size="318px" />
 
             <div class="flex justify-between items-center space-x-4">
-                <AppSizeCheck v-if="product.sizes" v-model="size" :options="product.sizes" class="grow" />
-                <AppColorCheck v-if="product.colors" v-model="color" :options="product.colors" class="grow" />
+                <ProductSizeCheck v-if="product.sizes" v-model="size" :options="product.sizes" class="grow" />
+                <ProductColorCheck v-if="product.colors" v-model="color" :options="product.colors" class="grow" />
             </div>
 
-            <AppRating :value="product.rating" :max="5" />
+            <ProductRating :value="product.rating" :max="5" />
         </section>
 
         <template #footer>
-            <div class="flex justify-between items-center">
-                <div class="text-lg font-semibold">&euro;{{ product.price }}</div>
+            <div class="flex justify-between items-center px-2">
+                <div class="text-xl font-semibold">&euro;{{ product.price }}</div>
                 <div class="flex items-center space-x-2">
                     <small v-if="isProductInCart" class="text-rose-600">Already in cart</small>
                     <div class="w-28">

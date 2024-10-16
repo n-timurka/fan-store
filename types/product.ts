@@ -7,8 +7,8 @@ export type Product = {
   description: string;
   price: number;
   category: string;
-  colors: ProductColorEnum[];
-  sizes: string[];
+  colors?: ProductColorEnum[];
+  sizes?: string[];
   rating: number;
   images: string[];
 };
