@@ -10,10 +10,6 @@ useHead({
     { property: 'og:description', content: 'Complete your purchase securely and quickly. Shop with confidence at our secure online store.' },
     // { property: 'og:image', content: 'https://your-site.com/images/checkout-og-image.jpg' },
     { property: 'og:type', content: 'website' },
-    { name: 'twitter:card', content: 'summary_large_image' },
-    { name: 'twitter:title', content: 'Secure Checkout | Sports Team Fan Store' },
-    { name: 'twitter:description', content: 'Complete your purchase securely and quickly with our trusted payment methods.' },
-    // { name: 'twitter:image', content: 'https://your-site.com/images/checkout-twitter-card.jpg' }
   ]
 });
 
@@ -78,10 +74,10 @@ const onSubmit = async (event: FormSubmitEvent<Schema>) => {
       <h1 class="text-2xl font-semibold mb-4">Checkout</h1>
 
       <UAlert v-if="!cart.length" icon="i-heroicons-exclamation-circle-20-solid" title="You have nothing in your cart. Put something there first" />
-      <div v-else class="flex justify-between space-x-6">
+      <div v-else class="md:flex md:justify-between md:space-x-6 space-y-6 md:space-y-0">
         <UCard class="flex-1">
           <UForm id="checkout-form" :schema="schema" :state="state" @submit.prevent="onSubmit">
-            <div class="flex space-x-8">
+            <div class="md:flex md:space-x-8 space-y-8 md:space-y-0">
               <fieldset class="space-y-4 flex-1">
                 <legend class="font-semibold">Personal data</legend>
 
@@ -124,6 +120,15 @@ const onSubmit = async (event: FormSubmitEvent<Schema>) => {
                 </div>
               </fieldset>
             </div>
+
+            <UAlert
+              class="mt-4"
+              icon="i-heroicons-command-line"
+              color="rose"
+              variant="soft"
+              title="Payment notes!"
+              description="The payment step is fake, you don't have to spent your money here. If you want to test the proccess, you can use test card numbers: Visa (4242424242424242), Mastercard (5555555555554444) or American Express (378282246310005). You can use any 3 digits as CVC and choose any future date as Expired Date"
+            />
           </UForm>
 
           <template #footer>
@@ -142,7 +147,7 @@ const onSubmit = async (event: FormSubmitEvent<Schema>) => {
               :ui="{ body: { base: 'flex-1' }, ring: '', divide: 'divide-y divide-gray-100 dark:divide-gray-800' }"
           >
             <template #header>
-              Products
+              <h3 class="header-3">Products</h3>
             </template>
 
             <div class="space-y-4">
@@ -152,7 +157,11 @@ const onSubmit = async (event: FormSubmitEvent<Schema>) => {
 
                 <div class="grow space-y-2 flex flex-col my-4">
                     <div class="grow">
-                        <h4 class="font-semibold">{{ item.product.name }}</h4>
+                        <h4 class="font-semibold">
+                          <NuxtLink :to="{ name: 'products-slug', params: { slug: item.product.slug } }">
+                            {{ item.product.name }}
+                          </NuxtLink>
+                        </h4>
                         <div v-if="item.options" class="text-sm">
                             <div v-if="item.options.size">Size: {{ item.options.size }}</div>
                             <div v-if="item.options.color">Color: {{ item.options.color }}</div>
