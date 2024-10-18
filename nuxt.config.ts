@@ -14,6 +14,11 @@ export default defineNuxtConfig({
     awsKeyId: process.env.ACCESS_KEY_ID,
     awsSecretAccessKey: process.env.SECRET_ACCESS_KEY,
     awsBucketName: process.env.BUCKET_NAME,
+    cognitoUserPoolId: process.env.USER_POOL_ID,
+    cognitoUserPoolClientId: process.env.USER_POOL_CLIENT_ID,
+    cognitoIdentityPoolId: process.env.IDENTITY_POOL_ID,
+    dynamoDbDataUrl: process.env.DYNAMODB_DATA_URL,
+    s3StorageBucketName: process.env.STORAGE_BUCKET_NAME,
   },
   modules: [
     "@nuxt/image",
@@ -24,28 +29,10 @@ export default defineNuxtConfig({
     "pinia-plugin-persistedstate/nuxt",
     "@nuxt/fonts",
   ],
+  plugins: ["~/plugins/amplify.ts"],
   image: {
     provider: "awsAmplify",
-    presets: {
-      small: {
-        modifiers: {
-          width: 128,
-          height: 128,
-        },
-      },
-      medium: {
-        modifiers: {
-          width: 318,
-          height: 318,
-        },
-      },
-      large: {
-        modifiers: {
-          width: 752,
-          height: 752,
-        },
-      },
-    },
+    domains: [process.env.IMAGE_BASE_URL],
   },
   tailwindcss: {
     cssPath: "~/assets/css/main.css",
