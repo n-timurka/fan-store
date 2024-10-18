@@ -5,10 +5,10 @@ import type { ProductsResponse } from '~/types/productsResponse';
 // import { generateClient } from "aws-amplify/data";
 // import type { Schema } from "@/amplify/data/resource";
 
-// const client = generateClient<Schema>();
-// const { data: products } = await client.models.Product.list()
-
 const { slug } = useRoute().params
+
+// const client = generateClient<Schema>();
+// const { data: product } = await client.models.Product.get({ slug: String(slug) });
 const { data: product } = await useFetch<Product>(() => `/api/products/${slug}`);
 if (!product.value) {
     throw createError({
@@ -17,8 +17,13 @@ if (!product.value) {
     })
 }
 
+// if (!item) {
+//   const {id, images, ...rest} = product.value;
+//   await client.models.Product.create(rest);
+// }
+
 const { data: products } = await useFetch<ProductsResponse>('/api/products', {
-  query: { category: product.value.category, page: 1, perPage: 4, notIn: [product.value.id] },
+  query: { category: product.value.category, page: 1, perPage: 4, notIn: [product.value.slug] },
 })
 const relatedProducts = computed(() => products.value?.products.filter(p => p.id !== product.value?.id))
 
@@ -39,7 +44,7 @@ useHead({
     { name: 'description', content: product.value.description },
     { property: 'og:title', content: `${product.value.name} - Buy Now | Sports Team Fan Store` },
     { property: 'og:description', content: product.value.description },
-    { property: 'og:image', content: product.value.images[0] },
+    { property: 'og:image', content: product.value.images ? product.value.images[0] : '' },
     { property: 'og:type', content: 'product' },
   ]
 });
@@ -62,10 +67,12 @@ const quantity = ref(1)
   watch(
     () => product.value,
     () => {
-        if (product.value?.sizes && product.value.sizes.length) {
+        if (!product.value) return
+
+        if (product.value.sizes && product.value.sizes.length) {
           selectedSize.value = product.value.sizes[0]
         }
-        if (product.value?.colors && product.value.colors.length) {
+        if (product.value.colors && product.value.colors.length) {
           selectedColor.value = product.value.colors[0]
         }
     },

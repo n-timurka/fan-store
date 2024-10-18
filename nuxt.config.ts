@@ -24,6 +24,29 @@ export default defineNuxtConfig({
     "pinia-plugin-persistedstate/nuxt",
     "@nuxt/fonts",
   ],
+  image: {
+    provider: "awsAmplify",
+    presets: {
+      small: {
+        modifiers: {
+          width: 128,
+          height: 128,
+        },
+      },
+      medium: {
+        modifiers: {
+          width: 318,
+          height: 318,
+        },
+      },
+      large: {
+        modifiers: {
+          width: 752,
+          height: 752,
+        },
+      },
+    },
+  },
   tailwindcss: {
     cssPath: "~/assets/css/main.css",
   },

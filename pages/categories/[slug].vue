@@ -3,6 +3,8 @@ import type { CatalogFilters } from '~/types/catalogFilters';
 import type { Category } from '~/types/category';
 import { ProductsSortEnum } from '~/types/enums';
 import type { ProductsResponse } from '~/types/productsResponse';
+import { generateClient } from "aws-amplify/data";
+import type { Schema } from "@/amplify/data/resource";
 
 const { slug } = useRoute().params
 const { data: category } = await useFetch<Category>(() => `/api/categories/${slug}`);
@@ -12,6 +14,10 @@ if (!category.value) {
       statusMessage: 'Page Not Found'
     })
 }
+
+const client = generateClient<Schema>();
+const { data: items } = await client.models.Product.list();
+
 const categoryImage = `${useRequestURL()}/categories/${category.value.slug}.webp`
 useHead({
   title: `${category.value.name} - Sports Merchandise | Sports Team Fan Store`,
@@ -68,6 +74,7 @@ const { data, status } = await useLazyFetch<ProductsResponse>('/api/products', {
     </div>
     <UAlert v-else-if="!data || !data.products.length" title="Nothing was found..." />
     <template v-else>
+      {{  items  }}
       <div class="grid md:grid-cols-4 gap-6">
         <CatalogProductCard v-for="product in data.products" :key="product.id" :product="product" />
       </div>
