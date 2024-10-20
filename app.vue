@@ -1,4 +1,9 @@
 <script setup lang="ts">
+const { initCart } = useCartStore();
+if (import.meta.client) {
+  await initCart();
+}
+
 const { FetchCategories } = useCategoriesStore()
 await FetchCategories()
 </script>

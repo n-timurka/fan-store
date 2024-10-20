@@ -1,5 +1,5 @@
 import { useServerStripe } from "#stripe/server";
-import type { Cart } from "~/types/cart";
+import type { Cart } from "~/types/cartItem";
 
 export default defineEventHandler(async (event) => {
   // Get the data from the request body

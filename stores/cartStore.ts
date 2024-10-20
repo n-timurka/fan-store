@@ -1,70 +1,117 @@
-import type { Cart } from "~/types/cart";
+import type { CartItem } from "~/types/cartItem";
 
-export const useCartStore = defineStore(
-  "cart",
-  () => {
-    const cart = ref<Cart[]>([]);
+export const useCartStore = defineStore("cartStore", () => {
+  const cart = ref<CartItem[]>([]);
+  const isLoading = ref(true);
 
-    const addToCart = (data: Cart) => {
-      const cartItem = cart.value.find(
-        (item) =>
-          item.product.id === data.product.id &&
-          item.options?.size === data.options?.size &&
-          item.options?.color === data.options?.color
-      );
+  watch(
+    cart,
+    () => {
+      const data = cart.value.map((item) => ({
+        productId: item.product.id,
+        quantity: item.quantity,
+        options: item.options,
+      }));
 
-      if (cartItem) {
-        cartItem.quantity += data.quantity;
-      } else {
-        cart.value.push(data);
-      }
-    };
-    const removeFromCart = (data: Cart) => {
-      const cartItem = cart.value.find(
-        (item) =>
-          item.product.id === data.product.id &&
-          item.options?.size === data.options?.size &&
-          item.options?.color === data.options?.color
-      );
-      if (!cartItem) return;
+      localStorage.setItem("cart", JSON.stringify(data));
+    },
+    { deep: true }
+  );
 
-      if (cartItem.quantity > 1) {
-        cartItem.quantity -= data.quantity;
-      } else {
-        cart.value = cart.value.filter(
-          (item) => item.product.id !== data.product.id
+  const initCart = async () => {
+    if (!import.meta.client) return;
+
+    const storedCart = localStorage.getItem("cart");
+    if (!storedCart) return;
+
+    isLoading.value = true;
+    const data: {
+      productId: number;
+      quantity: number;
+      options?: Record<string, string>;
+    }[] = JSON.parse(storedCart);
+    const productIds = [...new Set(data.map((item) => item.productId))];
+
+    try {
+      const { products } = await $fetch("/api/products", {
+        query: { ids: productIds },
+      });
+      cart.value = data.map((item) => {
+        const product = products.find(
+          (product) => product.id === item.productId
         );
-      }
-    };
-    const clearCart = () => {
-      cart.value = [];
-    };
 
-    const productsNumber = computed(() =>
-      cart.value.reduce((total, item) => (total += item.quantity), 0)
+        return {
+          quantity: item.quantity,
+          options: item.options,
+          product,
+        };
+      });
+    } finally {
+      isLoading.value = false;
+    }
+  };
+
+  const addToCart = (data: CartItem) => {
+    const cartItem = cart.value.find(
+      (item) =>
+        item.product.id === data.product.id &&
+        JSON.stringify(item.options) === JSON.stringify(data.options)
     );
-    const totalCost = computed(() =>
-      cart.value.reduce(
-        (total, item) => (total += item.quantity * item.product.price),
-        0
-      )
+
+    if (cartItem) {
+      cartItem.quantity += data.quantity;
+    } else {
+      cart.value = [...cart.value, data];
+    }
+  };
+
+  const removeFromCart = (data: CartItem) => {
+    const cartItem = cart.value.find(
+      (item) =>
+        item.product.id === data.product.id &&
+        JSON.stringify(item.options) === JSON.stringify(data.options)
     );
+    if (!cartItem) return;
 
-    const productItemsNumber = (productId: number) =>
-      cart.value.filter((item) => item.product.id === productId).length;
-    const isProductInCart = (productId: number) =>
-      cart.value.some((item) => item.product.id === productId);
+    if (cartItem.quantity > 1) {
+      cartItem.quantity -= data.quantity;
+    } else {
+      cart.value = cart.value.filter(
+        (item) => item.product.id !== data.product.id
+      );
+    }
+  };
 
-    return {
-      cart,
-      addToCart,
-      removeFromCart,
-      isProductInCart,
-      clearCart,
-      productItemsNumber,
-      productsNumber,
-      totalCost,
-    };
-  },
-  { persist: true }
-);
+  const clearCart = () => {
+    cart.value = [];
+  };
+
+  const productsNumber = computed(() =>
+    cart.value.reduce((total, item) => (total += item.quantity), 0)
+  );
+  const totalCost = computed(() =>
+    cart.value.reduce(
+      (total, item) => (total += item.quantity * item.product.price),
+      0
+    )
+  );
+
+  const productItemsNumber = (productId: number) =>
+    cart.value.filter((item) => item.product.id === productId).length;
+  const isProductInCart = (productId: number) =>
+    productItemsNumber(productId) > 0;
+
+  return {
+    cart,
+    isLoading,
+    initCart,
+    addToCart,
+    removeFromCart,
+    isProductInCart,
+    clearCart,
+    productItemsNumber,
+    productsNumber,
+    totalCost,
+  };
+});

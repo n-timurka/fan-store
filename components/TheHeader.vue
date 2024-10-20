@@ -2,7 +2,7 @@
 const route = useRoute()
 
 const cartStore = useCartStore()
-const totalProducts = computed(() => cartStore.productsNumber)
+const { isLoading, productsNumber: totalProducts } = storeToRefs(cartStore)
 
 const isCartOpen = ref(false)
 </script>
@@ -22,14 +22,25 @@ const isCartOpen = ref(false)
           <TheMenu />
 
           <div v-if="route.name !== 'checkout'" class="flex space-x-2">
-            <UChip :text="totalProducts" size="2xl" color="rose" :show="totalProducts > 0">
-              <UButton
-                color="rose"
-                variant="soft"
-                icon="i-heroicons-shopping-cart"
-                :ui="{ rounded: 'rounded-full' }"
-                @click="isCartOpen = true" />
-            </UChip>
+            <ClientOnly>
+              <UChip :text="totalProducts" size="2xl" color="rose" :show="totalProducts > 0">
+                <UButton
+                  color="rose"
+                  variant="soft"
+                  icon="i-heroicons-shopping-cart"
+                  :ui="{ rounded: 'rounded-full' }"
+                  :loading="isLoading"
+                  @click="isCartOpen = true" />
+              </UChip>
+
+              <template #fallback>
+                <UButton
+                  color="rose"
+                  variant="soft"
+                  icon="i-heroicons-shopping-cart"
+                  :ui="{ rounded: 'rounded-full' }" />
+              </template>
+            </ClientOnly>
           </div>
         </div>
       </div>

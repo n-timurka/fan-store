@@ -49,7 +49,7 @@ const isProductInCart = computed(() => cart.value.some(item => item.product.id =
             <h4 class="w-full truncate">
                 <NuxtLink
                     :to="{ name: 'products-slug', params: { slug: product.slug } }"
-                    class="px-2 text-xl md:text-base font-semibold hover:border-b">
+                    class="px-2 md:p-0 text-xl md:text-base font-semibold hover:border-b">
                     {{ product.name }}
                 </NuxtLink>
             </h4>
@@ -70,7 +70,9 @@ const isProductInCart = computed(() => cart.value.some(item => item.product.id =
             <div class="flex justify-between items-center px-2">
                 <div class="text-xl font-semibold">&euro;{{ product.price }}</div>
                 <div class="flex items-center space-x-2">
-                    <small v-if="isProductInCart" class="text-rose-600">Already in cart</small>
+                    <ClientOnly>
+                        <small v-if="isProductInCart" class="text-rose-600">Already in cart</small>
+                    </ClientOnly>
                     <div class="w-28">
                         <UButton color="rose" variant="solid" size="lg" block @click="buyProduct">
                             Add to Cart

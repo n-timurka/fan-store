@@ -3,7 +3,7 @@ import { useS3Client } from "@/server/utils/s3";
 import { ProductsSortEnum } from "~/types/enums";
 
 export default defineEventHandler(async (event) => {
-  const { category, sizes, colors, sort, page, perPage, min, max, notIn } =
+  const { category, sizes, colors, sort, page, perPage, min, max, ids, notIn } =
     getQuery(event);
 
   const productsItems = category
@@ -19,6 +19,9 @@ export default defineEventHandler(async (event) => {
 
   // Filtration
   let filteredProducts = productsItems.filter((product) => {
+    // Check if the product is in the `in` list
+    if (ids && (ids as number[]).includes(product.id)) return true;
+
     // Check if the product is in the `not in` list
     if (notIn && (notIn as number[]).includes(product.id)) return false;
 

@@ -14,10 +14,6 @@ export default defineNuxtConfig({
     awsKeyId: process.env.ACCESS_KEY_ID,
     awsSecretAccessKey: process.env.SECRET_ACCESS_KEY,
     awsBucketName: process.env.BUCKET_NAME,
-    cognitoUserPoolId: process.env.USER_POOL_ID,
-    cognitoUserPoolClientId: process.env.USER_POOL_CLIENT_ID,
-    cognitoIdentityPoolId: process.env.IDENTITY_POOL_ID,
-    dynamoDbDataUrl: process.env.DYNAMODB_DATA_URL,
     s3StorageBucketName: process.env.STORAGE_BUCKET_NAME,
   },
   modules: [
@@ -26,13 +22,12 @@ export default defineNuxtConfig({
     "@nuxt/ui",
     "@nuxt/eslint",
     "@pinia/nuxt",
-    "pinia-plugin-persistedstate/nuxt",
     "@nuxt/fonts",
+    "@vueuse/nuxt",
   ],
-  plugins: ["~/plugins/amplify.ts"],
   image: {
     provider: "awsAmplify",
-    domains: [process.env.IMAGE_BASE_URL],
+    domains: [process.env.IMAGE_BASE_URL || ""],
   },
   tailwindcss: {
     cssPath: "~/assets/css/main.css",

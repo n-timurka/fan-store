@@ -2,13 +2,8 @@
 import type { ProductColorEnum } from '~/types/enums';
 import type { Product } from '~/types/product';
 import type { ProductsResponse } from '~/types/productsResponse';
-// import { generateClient } from "aws-amplify/data";
-// import type { Schema } from "@/amplify/data/resource";
 
 const { slug } = useRoute().params
-
-// const client = generateClient<Schema>();
-// const { data: product } = await client.models.Product.get({ slug: String(slug) });
 const { data: product } = await useFetch<Product>(() => `/api/products/${slug}`);
 if (!product.value) {
     throw createError({
@@ -16,11 +11,6 @@ if (!product.value) {
       statusMessage: 'Page Not Found'
     })
 }
-
-// if (!item) {
-//   const {id, images, ...rest} = product.value;
-//   await client.models.Product.create(rest);
-// }
 
 const { data: products } = await useFetch<ProductsResponse>('/api/products', {
   query: { category: product.value.category, page: 1, perPage: 4, notIn: [product.value.slug] },
@@ -94,7 +84,7 @@ const buyProduct = () => {
   toast.add({ title: 'You`ve added product to the cart' })
 }
 
-const isProductInCart = computed(() => cart.value.some(item => item.product.id === product.value?.id))
+const isProductInCart = computed(() => cart.value?.some(item => item.productId === product.value?.id))
 </script>
 
 <template>
@@ -131,7 +121,9 @@ const isProductInCart = computed(() => cart.value.some(item => item.product.id =
         <div class="flex space-x-4 items-center">
           <ProductQuantity v-model="quantity" class="w-28" size="xl" />
           <UButton size="xl" color="rose" @click="buyProduct">Add to cart</UButton>
-          <small v-if="isProductInCart" class="text-rose-600">Already items in cart: {{ productsNumberInCart }}</small>
+          <ClientOnly>
+            <small v-if="isProductInCart" class="text-rose-600">Already items in cart: {{ productsNumberInCart }}</small>
+          </ClientOnly>
         </div>
       </div>
     </section>

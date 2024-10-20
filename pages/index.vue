@@ -22,8 +22,6 @@ const { data } = await useFetch('/api/products', {
     <main class="flex flex-col space-y-10 md:space-y-20 mb-20">
       <MainHero />
 
-      <NuxtImg src='/scarf.webp' alt="Image from S3" />
-
       <MainCategories v-if="categories" :categories="categories" />
 
       <MainHowTo />
