@@ -23,7 +23,6 @@ export default defineNuxtConfig({
     "@nuxt/eslint",
     "@pinia/nuxt",
     "@nuxt/fonts",
-    "@vueuse/nuxt",
   ],
   image: {
     provider: "awsAmplify",
