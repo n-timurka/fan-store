@@ -2,24 +2,26 @@ import { GetObjectCommand, S3Client } from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 
 export type S3Config = {
-  keyId: string;
-  secretKey: string;
+  accessKeyId: string;
+  secretAccessKey: string;
   region: string;
   bucket: string;
 };
 
 export const useS3Client = (config: S3Config) => {
+  const { accessKeyId, secretAccessKey, region, bucket: Bucket } = config;
+
   const s3Client = new S3Client({
     credentials: {
-      accessKeyId: config.keyId,
-      secretAccessKey: config.secretKey,
+      accessKeyId,
+      secretAccessKey,
     },
-    region: config.region,
+    region,
   });
 
   async function getSignedImageUrl(fileName: string): Promise<string> {
     const command = new GetObjectCommand({
-      Bucket: config.bucket,
+      Bucket,
       Key: fileName,
     });
 

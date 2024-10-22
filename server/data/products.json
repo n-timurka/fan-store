@@ -8,7 +8,7 @@
       "description": "Official home team kit for the 2024 season. Made from lightweight, breathable fabric to keep you cool on and off the field.",
       "sizes": ["S", "M", "L", "XL"],
       "rating": 4.8,
-      "images": ["medium/starter-kit.webp", "medium/home-kit-back.webp"]
+      "images": ["starter-kit.webp", "home-kit-back.webp"]
     },
     {
       "id": 2,
@@ -19,7 +19,7 @@
       "description": "The official away team kit for the 2024 season, designed with durable fabric and moisture-wicking technology.",
       "sizes": ["S", "M", "L", "XL", "XXL"],
       "rating": 4.7,
-      "images": ["medium/away-kit.webp", "medium/away-kit-2.webp"]
+      "images": ["away-kit.webp", "away-kit-2.webp"]
     },
     {
       "id": 3,
@@ -30,7 +30,7 @@
       "description": "Show your support with this stylish team scarf. Perfect for match days or keeping warm during winter.",
       "colors": ["Red", "Blue", "Green"],
       "rating": 4.9,
-      "images": ["medium/scarf.webp"]
+      "images": ["scarf.webp"]
     },
     {
       "id": 4,
@@ -42,7 +42,7 @@
       "sizes": ["M", "L", "XL", "XXL"],
       "colors": ["Gray", "Black"],
       "rating": 4.6,
-      "images": ["medium/hoodie.webp"]
+      "images": ["hoodie.webp"]
     },
     {
       "id": 5,
@@ -76,7 +76,7 @@
       "description": "Official match ball used by the team during the 2024 season. High durability and perfect for all weather conditions.",
       "colors": ["White", "Black"],
       "rating": 4.8,
-      "images": []
+      "images": ["ball.webp"]
     },
     {
       "id": 8,
@@ -87,7 +87,7 @@
       "description": "Stay cool and support the team with this adjustable cap, featuring an embroidered team logo.",
       "colors": ["Blue", "Black", "White"],
       "rating": 4.7,
-      "images": []
+      "images": ["cap.webp"]
     },
     {
       "id": 9,
@@ -98,7 +98,7 @@
       "description": "Durable and spacious team backpack, perfect for carrying your gear on match day.",
       "colors": ["Black", "Gray"],
       "rating": 4.8,
-      "images": []
+      "images": ["backpack.webp"]
     },
     {
       "id": 10,

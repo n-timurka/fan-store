@@ -89,11 +89,12 @@ export default defineEventHandler(async (event) => {
   }
 
   const config = useRuntimeConfig(event);
+  const { accessKeyId, secretAccessKey, region, bucket } = config.aws;
   const { getSignedImageUrl } = useS3Client({
-    keyId: config.awsKeyId,
-    secretKey: config.awsSecretAccessKey,
-    region: config.awsRegion,
-    bucket: config.awsBucketName,
+    accessKeyId,
+    secretAccessKey,
+    region,
+    bucket,
   });
 
   const productsList = await Promise.all(
@@ -101,7 +102,9 @@ export default defineEventHandler(async (event) => {
       ...product,
       images: product.images
         ? await Promise.all(
-            product.images.map(async (image) => await getSignedImageUrl(image))
+            product.images.map(
+              async (image) => await getSignedImageUrl(`medium/${image}`)
+            )
           )
         : [],
     }))

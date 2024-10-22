@@ -1,8 +1,9 @@
 import type { CartItem } from "~/types/cartItem";
+import type { Product } from "~/types/product";
 
 export const useCartStore = defineStore("cartStore", () => {
   const cart = ref<CartItem[]>([]);
-  const isLoading = ref(true);
+  const isLoading = ref(false);
 
   watch(
     cart,
@@ -24,7 +25,6 @@ export const useCartStore = defineStore("cartStore", () => {
     const storedCart = localStorage.getItem("cart");
     if (!storedCart) return;
 
-    isLoading.value = true;
     const data: {
       productId: number;
       quantity: number;
@@ -32,21 +32,27 @@ export const useCartStore = defineStore("cartStore", () => {
     }[] = JSON.parse(storedCart);
     const productIds = [...new Set(data.map((item) => item.productId))];
 
+    if (!productIds.length) return;
+
     try {
-      const { products } = await $fetch("/api/products", {
+      isLoading.value = true;
+      const products = await $fetch<Product[]>("/api/cart", {
         query: { ids: productIds },
       });
-      cart.value = data.map((item) => {
-        const product = products.find(
-          (product) => product.id === item.productId
-        );
+      cart.value = data
+        .map((item) => {
+          const product = products.find(
+            (product) => product.id === item.productId
+          );
+          if (!product) return;
 
-        return {
-          quantity: item.quantity,
-          options: item.options,
-          product,
-        };
-      });
+          return {
+            quantity: item.quantity,
+            options: item.options,
+            product,
+          };
+        })
+        .filter((item) => item !== undefined);
     } finally {
       isLoading.value = false;
     }

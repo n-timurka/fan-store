@@ -1,5 +1,5 @@
 import { useServerStripe } from "#stripe/server";
-import type { Cart } from "~/types/cartItem";
+import type { CartItem } from "~/types/cartItem";
 
 export default defineEventHandler(async (event) => {
   // Get the data from the request body
@@ -15,7 +15,7 @@ export default defineEventHandler(async (event) => {
     // Create a Stripe Checkout session
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
-      line_items: products.map((item: Cart) => ({
+      line_items: products.map((item: CartItem) => ({
         price_data: {
           currency: "eur",
           product_data: {

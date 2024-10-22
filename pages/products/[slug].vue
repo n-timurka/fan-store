@@ -12,10 +12,9 @@ if (!product.value) {
     })
 }
 
-const { data: products } = await useFetch<ProductsResponse>('/api/products', {
-  query: { category: product.value.category, page: 1, perPage: 4, notIn: [product.value.slug] },
+const { data: relatedProducts } = await useFetch<ProductsResponse>('/api/products', {
+  query: { category: product.value.category, page: 1, perPage: 4, notIn: [product.value.id] },
 })
-const relatedProducts = computed(() => products.value?.products.filter(p => p.id !== product.value?.id))
 
 const toast = useToast()
 const cartStore = useCartStore();
@@ -84,7 +83,7 @@ const buyProduct = () => {
   toast.add({ title: 'You`ve added product to the cart' })
 }
 
-const isProductInCart = computed(() => cart.value?.some(item => item.productId === product.value?.id))
+const isProductInCart = computed(() => cart.value?.some(item => item.product.id === product.value?.id))
 </script>
 
 <template>
@@ -128,10 +127,10 @@ const isProductInCart = computed(() => cart.value?.some(item => item.productId =
       </div>
     </section>
 
-    <section v-if="relatedProducts">
+    <section v-if="relatedProducts?.products">
       <h3 class="header-3 text-center mb-4">Similar products</h3>
       <div class="flex flex-col md:flex-row justify-center md:justify-start md:space-x-6 space-y-4 md:space-y-0">
-        <AppProductCard v-for="p in relatedProducts" :key="p.id" :product="p" class="w-[366px]" />
+        <AppProductCard v-for="p in relatedProducts.products" :key="p.id" :product="p" class="w-[366px]" />
       </div>
     </section>
   </main>
